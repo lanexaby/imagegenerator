@@ -1,3 +1,4 @@
+
 import { GoogleGenAI, GenerateContentResponse, Type, Part } from "@google/genai";
 import { GEMINI_MODEL_NAME } from '../constants';
 import { PromptData } from "../types";
@@ -67,8 +68,15 @@ export const generatePromptFromIdea = async (idea: Part[]): Promise<Partial<Prom
      - **Detail Tambahan:**
        - **Jadilah liar.** Pikirkan tentang bau di udara, suhu, suara di kejauhan, partikel debu yang menari di udara. Contoh: \`Udara terasa dingin dan berbau ozon setelah hujan petir, dan di kejauhan, terdengar gema lonceng menara jam kuno yang telah lama terlupakan.\`
 
+**3. Detail Karakter yang Wajib Diisi (Jika Subjeknya adalah Manusia/Humanoid):**
+   - Jika \`subjek\` yang dideskripsikan adalah seorang manusia, persona, atau makhluk humanoid, maka bidang-bidang berikut **WAJIB DIISI** dengan detail yang kaya: \`usia\`, \`warnaKulit\`, \`wajah\`, \`rambut\`, \`pakaian\`, dan \`ekspresi\`.
+   - **Penekanan Khusus pada \`warnaKulit\`:** Bidang ini tidak boleh kosong jika subjeknya adalah manusia. Berikan deskripsi yang spesifik dan evocatif.
+     - **Contoh untuk \`warnaKulit\`:**
+       - **DILARANG:** \`putih\`, atau dibiarkan kosong.
+       - **DIHARUSKAN:** \`kulit porselen pucat yang memantulkan cahaya bulan\`, atau \`kulit sawo matang hangat yang berkilau karena embun pagi\`, atau \`kulit zaitun keemasan yang bercahaya di bawah sinar matahari sore\`.
+
 **Tujuan Akhir:**
-- Ciptakan sebuah JSON yang begitu detail sehingga seorang seniman dapat melukis sebuah mahakarya hanya dari deskripsi Anda. Semua bidang harus diisi. Tidak ada yang boleh dibiarkan dangkal.
+- Ciptakan sebuah JSON yang begitu detail sehingga seorang seniman dapat melukis sebuah mahakarya hanya dari deskripsi Anda. Semua bidang yang relevan harus diisi. Tidak ada yang boleh dibiarkan dangkal.
 
 **Output Anda:**
 - Hasil akhir HARUS berupa satu objek JSON yang valid, lengkap, dan sangat detail, tanpa teks atau penjelasan tambahan di luarnya.`;
