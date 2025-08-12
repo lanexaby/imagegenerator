@@ -1,5 +1,4 @@
 {
-  "name": "Imagen 4 Consistent Prompt Generator",
-  "description": "A web application to generate detailed and consistent image prompts for AI image generators. Features a maroon glassmorphism UI, idea generation from text or images via Gemini, and detailed controls for every aspect of the prompt.",
-  "requestFramePermissions": []
+  "name": "Generator Prompt Pro AI",
+  "description": "Aplikasi web profesional untuk menghasilkan prompt yang terstruktur dengan baik untuk model Veo 3 (video) dan Imagen (gambar) menggunakan AI. Menampilkan UI Glassmorphism pelangi yang menakjubkan."
 }

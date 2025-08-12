@@ -1,15 +1,48 @@
-
-export interface Option {
-  id: string;
-  label: string;
-  value: string;
-  indonesianLabel?: string;
-}
+export type GeneratorType = 'veo' | 'imagen';
 
 export interface PromptData {
+  [key: string]: string;
+}
+
+export interface FieldDefinition {
+  key: string;
+  label: string;
+  placeholder: string;
+  type?: 'text' | 'textarea' | 'select';
+  options?: string[];
+}
+
+export interface VeoPromptData extends PromptData {
+  ide_prompt: string;
   subjek: string;
   usia: string;
-  warnaKulit: string;
+  warna_kulit: string;
+  wajah: string;
+  rambut: string;
+  pakaian: string;
+  asal: string;
+  asesoris: string;
+  aksi: string;
+  ekspresi: string;
+  tempat: string;
+  waktu: string;
+  gerakan_kamera: string;
+  pencahayaan: string;
+  gaya_video: string;
+  kualitas_video: string;
+  suasana_video: string;
+  suara_atau_musik: string;
+  dialog: string;
+  detail_tambahan: string;
+  technical_instructions: string;
+  negativePrompt: string;
+}
+
+export interface ImagenPromptData extends PromptData {
+  ide_prompt: string;
+  subjek: string;
+  usia: string;
+  warna_kulit: string;
   wajah: string;
   rambut: string;
   pakaian: string;
@@ -22,47 +55,10 @@ export interface PromptData {
   kamera: string;
   pencahayaan: string;
   gaya: string;
-  kualitasGambar: string;
-  suasanaGambar: string;
-  aspekRasio: string;
-  detailTambahan: string;
+  kualitas_gambar: string;
+  suasana_gambar: string;
+  aspek_rasio: string;
+  dialog: string;
+  detail_tambahan: string;
   negativePrompt: string;
-}
-
-export enum ImageStyleCategory {
-  PHOTOREALISTIC = "Photorealistic",
-  CINEMATIC = "Cinematic",
-  OIL_PAINTING = "Oil Painting",
-  WATERCOLOR = "Watercolor",
-  ANIME_STYLE = "Anime Style",
-  FANTASY_ART = "Fantasy Art",
-  RETRO = "Retro",
-  VINTAGE_PHOTOGRAPHY = "Vintage Photography",
-  CYBERPUNK = "Cyberpunk",
-  STEAMPUNK = "Steampunk",
-  MINIMALIST = "Minimalist",
-  ABSTRACT = "Abstract",
-  IMPRESSIONISTIC = "Impressionistic",
-  CONCEPT_ART = "Concept Art",
-  DRAMATIC_LIGHTING = "Dramatic Lighting",
-  STUDIO_PORTRAIT = "Studio Portrait",
-  DOCUMENTARY_STYLE = "Documentary Style",
-  SURREAL = "Surreal",
-  NEON_PUNK = "Neon Punk",
-  DARK_FANTASY = "Dark Fantasy",
-}
-
-export interface GroundingChunkWeb {
-  uri: string;
-  title: string;
-}
-
-export interface GroundingChunk {
-  web?: GroundingChunkWeb;
-  // Other types of chunks can be added here if needed
-}
-
-export interface GroundingMetadata {
-  groundingChunks?: GroundingChunk[];
-  // Other grounding metadata fields can be added
 }
