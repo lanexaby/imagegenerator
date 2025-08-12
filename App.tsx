@@ -99,7 +99,7 @@ const HeartbeatLoader = ({ text, className = '' }: { text: string; className?: s
                 }
                 `}
             </style>
-            <path className="pulse-path-hbl" d="M0,15 h20 l5,-10 l10,20 l5,-10 h20 l5,-10 l10,20 l5,-10 h20 l5,-10 l10,20 l5,-10 h20 l5,-10 l10,20 l5,-10 h20 l5,-10 l10,20 l5,-10 h20" />
+            <path className="pulse-path-hbl" d="M0,15 h20 l5,-10 l10,20 l5,-10 h20 l5,-10 l10,20 l5,-10 h20 l5,-10 l10,20 l5,-10 h20 l5,-10 l10,20 l5,-10 h20" />
         </svg>
         <span className="text-sm text-pink-200/90 font-medium">{text}</span>
     </div>
@@ -108,25 +108,25 @@ const HeartbeatLoader = ({ text, className = '' }: { text: string; className?: s
 
 const App: React.FC = () => {
     const initialPromptData: PromptData = {
-        subjek: 'Seorang wanita muda',
-        usia: '20-an',
-        warnaKulit: 'Sawo matang',
-        wajah: 'Wajah oval, mata ekspresif',
-        rambut: 'Panjang terurai, hitam legam',
-        pakaian: 'Gaun batik modern',
-        asal: 'Indonesia',
-        asesoris: 'Anting perak sederhana',
-        aksi: 'Menatap ke arah kejauhan sambil tersenyum tipis',
-        ekspresi: 'Tenang dan penuh harap',
-        tempat: 'Di teras sebuah joglo di pedesaan',
-        waktu: 'Golden hour, late afternoon sun',
-        kamera: 'Medium shot, waist up',
-        pencahayaan: 'Soft natural light',
-        gaya: 'Cinematic, film look, moody color grading',
-        kualitasGambar: 'high quality, highly detailed, sharp focus',
-        suasanaGambar: 'Melancholic, calm, serene, pensive',
-        aspekRasio: '16:9 aspect ratio',
-        detailTambahan: 'Ada kabut tipis di kejauhan, latar belakang sawah hijau.',
+        subjek: '',
+        usia: '',
+        warnaKulit: '',
+        wajah: '',
+        rambut: '',
+        pakaian: '',
+        asal: '',
+        asesoris: '',
+        aksi: '',
+        ekspresi: '',
+        tempat: '',
+        waktu: '',
+        kamera: '',
+        pencahayaan: '',
+        gaya: '',
+        kualitasGambar: '',
+        suasanaGambar: '',
+        aspekRasio: '',
+        detailTambahan: '',
         negativePrompt: DEFAULT_NEGATIVE_PROMPT,
     };
 
@@ -152,29 +152,43 @@ const App: React.FC = () => {
   };
   
   const constructIndonesianPrompt = useCallback((): string => {
-    // Construct a comma-separated list of keywords from the form data
-    const promptParts = [
-      promptData.subjek,
-      `usia ${promptData.usia}`,
-      `kulit ${promptData.warnaKulit}`,
-      `wajah ${promptData.wajah}`,
-      `rambut ${promptData.rambut}`,
-      `mengenakan ${promptData.pakaian}`,
-      `berasal dari ${promptData.asal}`,
-      `dengan ${promptData.asesoris}`,
-      `sedang ${promptData.aksi}`,
-      `ekspresi ${promptData.ekspresi}`,
-      `di ${promptData.tempat}`,
-      promptData.waktu,
-      promptData.kamera,
-      promptData.pencahayaan,
-      promptData.gaya,
-      promptData.kualitasGambar,
-      `suasana ${promptData.suasanaGambar}`,
-      promptData.aspekRasio,
-      promptData.detailTambahan,
+    const {
+        subjek, usia, warnaKulit, wajah, rambut, pakaian, asal, asesoris,
+        aksi, ekspresi, tempat, waktu, kamera, pencahayaan, gaya,
+        kualitasGambar, suasanaGambar, aspekRasio, detailTambahan
+    } = promptData;
+
+    const potentialParts = [
+        { value: subjek, prefix: "" },
+        { value: usia, prefix: "usia " },
+        { value: warnaKulit, prefix: "kulit " },
+        { value: wajah, prefix: "wajah " },
+        { value: rambut, prefix: "rambut " },
+        { value: pakaian, prefix: "mengenakan " },
+        { value: asal, prefix: "berasal dari " },
+        { value: asesoris, prefix: "dengan " },
+        { value: aksi, prefix: "sedang " },
+        { value: ekspresi, prefix: "ekspresi " },
+        { value: tempat, prefix: "di " },
+        { value: waktu, prefix: "" },
+        { value: kamera, prefix: "" },
+        { value: pencahayaan, prefix: "" },
+        { value: gaya, prefix: "" },
+        { value: kualitasGambar, prefix: "" },
+        { value: suasanaGambar, prefix: "suasana " },
+        { value: aspekRasio, prefix: "" },
+        { value: detailTambahan, prefix: "" },
     ];
-    return promptParts.filter(part => part && part.trim() !== '').join(', ');
+    
+    const promptParts = potentialParts.map(part => {
+        const trimmedValue = part.value.trim();
+        if (trimmedValue) {
+            return `${part.prefix}${trimmedValue}`;
+        }
+        return null;
+    }).filter(p => p !== null);
+
+    return promptParts.join(', ');
   }, [promptData]);
 
   const handleFullPromptGeneration = async () => {
@@ -183,6 +197,10 @@ const App: React.FC = () => {
       return;
     }
     const currentIndonesianPrompt = constructIndonesianPrompt();
+    if (!currentIndonesianPrompt) {
+        alert("Mohon isi beberapa detail sebelum menghasilkan prompt.");
+        return;
+    }
     setIndonesianPrompt(currentIndonesianPrompt);
     setShowResults(true);
     setIsLoading(true);
@@ -281,7 +299,7 @@ const App: React.FC = () => {
                   value={ideaText}
                   onChange={(e) => setIdeaText(e.target.value)}
                   className="w-full p-3 bg-red-900/50 border border-red-700/60 rounded-md text-pink-100 focus:ring-2 focus:ring-pink-400 placeholder-pink-300/70 mb-3 resize-none overflow-y-hidden"
-                  placeholder="Masukkan ide singkat, misal: 'wanita di pantai saat senja'"
+                  placeholder="Deskripsikan ide gambarmu di sini..."
                 />
                 <div className='flex items-center justify-start gap-3 flex-wrap'>
                   <button onClick={handleGenerateFromText} disabled={isGeneratingIdea} className="flex items-center justify-center gap-2 px-5 py-2.5 bg-pink-500/80 hover:bg-pink-600/90 text-white font-semibold rounded-lg shadow-md transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed">
