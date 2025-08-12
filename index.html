@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Imagen 4 Prompt Generator</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif; /* A nice sans-serif font */
+    }
+    /* Custom scrollbar for better aesthetics */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(128, 0, 0, 0.1); /* Maroon-ish transparent track */
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(180, 50, 50, 0.7); /* Slightly lighter maroon for thumb */
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(200, 70, 70, 0.9);
+    }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+<script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://esm.sh/react-dom@^19.1.0/",
+    "react/": "https://esm.sh/react@^19.1.0/",
+    "react": "https://esm.sh/react@^19.1.0",
+    "@google/genai": "https://esm.sh/@google/genai@^1.4.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="bg-gradient-to-br from-red-900 via-rose-900 to-red-800 text-pink-100">
+  <div id="root"></div>
+  <script>
+    // Optional: Define custom Tailwind theme extensions here if needed,
+    // though for this project, standard Tailwind and direct class application is preferred.
+    // tailwind.config = {
+    //   theme: {
+    //     extend: {
+    //       colors: {
+    //         maroon: {
+    //           'DEFAULT': '#800000',
+    //           'light': '#A52A2A',
+    //           'dark': '#600000',
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
+  </script>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
